@@ -12,6 +12,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const { authenticate } = require('./middleware/auth');
+console.log('Auth middleware loaded:', typeof authenticate);
+
 // health check route
 app.get('/', (req, res) => {
     res.json({ message: 'EnergyFlow API is running' });

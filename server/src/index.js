@@ -5,15 +5,14 @@ const cors = require('cors');
 require('dotenv').config();
 
 const pool = require('./config/db');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
-
-const { authenticate } = require('./middleware/auth');
-console.log('Auth middleware loaded:', typeof authenticate);
+app.use('/api/auth', authRoutes);
 
 // health check route
 app.get('/', (req, res) => {

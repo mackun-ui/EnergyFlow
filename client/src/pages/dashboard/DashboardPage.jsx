@@ -1,4 +1,11 @@
+import Layout from '../../components/layout/Layout';
+
 const DashboardPage = () => {
-  return <div>Dashboard Page</div>;
+  return (
+    <Layout>
+      <div>Dashboard coming soon...</div>
+    </Layout>
+  );
 };
+
 export default DashboardPage;

@@ -1,4 +1,11 @@
+import Layout from '../../components/layout/Layout';
+
 const ReportsPage = () => {
-  return <div>Reports Page</div>;
+  return (
+    <Layout>
+      <div>Reports coming soon...</div>
+    </Layout>
+  );
 };
+
 export default ReportsPage;

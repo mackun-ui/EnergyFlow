@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const energyRoutes = require('./routes/energyRoutes');
 
 const pool = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/energy', energyRoutes);
 
 // health check route
 app.get('/', (req, res) => {

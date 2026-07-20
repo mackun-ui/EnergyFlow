@@ -3,11 +3,12 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const energyRoutes = require('./routes/energyRoutes');
 
 const pool = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const energyRoutes = require('./routes/energyRoutes');
+const scheduleRoutes = require('./routes/scheduleRoutes');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/energy', energyRoutes);
+app.use('/api/schedules', scheduleRoutes);
 
 // health check route
 app.get('/', (req, res) => {

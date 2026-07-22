@@ -2,7 +2,7 @@ const StatCard = ({ title, value, unit, icon, color, subtitle }) => {
   return (
     <div style={styles.card}>
       <div style={styles.top}>
-        <div>
+        <div style={{ flex: 1 }}>
           <p style={styles.title}>{title}</p>
           <div style={styles.valueRow}>
             <span style={{ ...styles.value, color }}>{value}</span>
@@ -10,8 +10,12 @@ const StatCard = ({ title, value, unit, icon, color, subtitle }) => {
           </div>
           {subtitle && <p style={styles.subtitle}>{subtitle}</p>}
         </div>
-        <div style={{ ...styles.iconBox, background: `${color}20` }}>
-          <span style={styles.icon}>{icon}</span>
+        <div style={{
+          ...styles.iconBox,
+          background: `${color}18`,
+          border: `1px solid ${color}30`,
+        }}>
+          {icon}
         </div>
       </div>
     </div>
@@ -20,25 +24,27 @@ const StatCard = ({ title, value, unit, icon, color, subtitle }) => {
 
 const styles = {
   card: {
-    background: '#FFFFFF',
-    borderRadius: '12px',
+    background: '#111827',
+    borderRadius: '14px',
     padding: '20px',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+    border: '1px solid rgba(255,255,255,0.06)',
     flex: 1,
     minWidth: '180px',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
   },
   top: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    gap: '12px',
   },
   title: {
-    fontSize: '12px',
-    color: '#757575',
+    fontSize: '11px',
+    color: '#94A3B8',
     fontWeight: '600',
     textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    marginBottom: '8px',
+    letterSpacing: '0.8px',
+    marginBottom: '10px',
   },
   valueRow: {
     display: 'flex',
@@ -51,23 +57,21 @@ const styles = {
   },
   unit: {
     fontSize: '13px',
-    color: '#9E9E9E',
+    color: '#4B5563',
   },
   subtitle: {
     fontSize: '12px',
-    color: '#9E9E9E',
-    marginTop: '4px',
+    color: '#4B5563',
+    marginTop: '6px',
   },
   iconBox: {
     width: '44px',
     height: '44px',
-    borderRadius: '10px',
+    borderRadius: '12px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  icon: {
-    fontSize: '22px',
+    flexShrink: 0,
   },
 };
 

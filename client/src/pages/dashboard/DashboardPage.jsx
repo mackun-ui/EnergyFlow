@@ -6,6 +6,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
+import { Sun, Zap, Battery, AlertTriangle, RefreshCw } from 'lucide-react';
 
 const DashboardPage = () => {
   const [summary, setSummary] = useState(null);
@@ -77,7 +78,8 @@ const DashboardPage = () => {
           </p>
         </div>
         <button onClick={fetchDashboardData} style={styles.refreshButton}>
-          🔄 Refresh
+          <RefreshCw size={14} />
+          Refresh
         </button>
       </div>
 
@@ -88,31 +90,31 @@ const DashboardPage = () => {
             title="Avg Production"
             value={summary.avg_production}
             unit="kWh"
-            icon="☀️"
-            color="#2E7D32"
+            icon={<Sun size={20} color="#00C853" />}
+            color="#00C853"
             subtitle="Last 24 hours"
           />
           <StatCard
             title="Avg Consumption"
             value={summary.avg_consumption}
             unit="kWh"
-            icon="⚡"
-            color="#1565C0"
+            icon={<Zap size={20} color="#3B82F6" />}
+            color="#3B82F6"
             subtitle="Last 24 hours"
           />
           <StatCard
             title="Avg Battery"
             value={summary.avg_battery}
             unit="%"
-            icon="🔋"
+            icon={<Battery size={20} color={getBatteryColor(summary.avg_battery)} />}
             color={getBatteryColor(summary.avg_battery)}
             subtitle="Storage level"
           />
           <StatCard
             title="Outage Events"
             value={summary.outage_count}
-            icon="⚠️"
-            color="#C62828"
+            icon={<AlertTriangle size={20} color="#EF4444" />}
+            color="#EF4444"
             subtitle="Last 24 hours"
           />
         </div>
@@ -123,22 +125,29 @@ const DashboardPage = () => {
         <h2 style={styles.cardTitle}>Energy Production vs Consumption (24h)</h2>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={history}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#F0F0F0" />
-            <XAxis dataKey="time" tick={{ fontSize: 12 }} />
-            <YAxis tick={{ fontSize: 12 }} />
-            <Tooltip />
-            <Legend />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+            <XAxis dataKey="time" tick={{ fontSize: 12, fill: '#94A3B8' }} />
+            <YAxis tick={{ fontSize: 12, fill: '#94A3B8' }} />
+            <Tooltip
+              contentStyle={{
+                background: '#111827',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '10px',
+                color: '#F1F5F9',
+              }}
+            />
+            <Legend wrapperStyle={{ color: '#94A3B8' }} />
             <Line
               type="monotone"
               dataKey="Production"
-              stroke="#2E7D32"
+              stroke="#00C853"
               strokeWidth={2}
               dot={false}
             />
             <Line
               type="monotone"
               dataKey="Consumption"
-              stroke="#1565C0"
+              stroke="#3B82F6"
               strokeWidth={2}
               dot={false}
             />
@@ -204,14 +213,14 @@ const styles = {
     justifyContent: 'center',
     height: '60vh',
     fontSize: '16px',
-    color: '#757575',
+    color: '#94A3B8',
   },
   errorBox: {
-    background: '#FFEBEE',
-    color: '#C62828',
+    background: 'rgba(239,68,68,0.1)',
+    color: '#EF4444',
     padding: '16px',
-    borderRadius: '8px',
-    borderLeft: '4px solid #C62828',
+    borderRadius: '10px',
+    borderLeft: '3px solid #EF4444',
   },
   pageHeader: {
     display: 'flex',
@@ -222,21 +231,24 @@ const styles = {
   pageTitle: {
     fontSize: '24px',
     fontWeight: '700',
-    color: '#212121',
+    color: '#F1F5F9',
     marginBottom: '4px',
   },
   pageSubtitle: {
     fontSize: '13px',
-    color: '#757575',
+    color: '#94A3B8',
   },
   refreshButton: {
-    background: '#FFFFFF',
-    border: '1.5px solid #E0E0E0',
+    background: '#111827',
+    border: '1px solid rgba(255,255,255,0.08)',
     padding: '10px 16px',
-    borderRadius: '8px',
+    borderRadius: '10px',
     fontSize: '13px',
     fontWeight: '600',
-    color: '#424242',
+    color: '#94A3B8',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
   },
   statsRow: {
     display: 'flex',
@@ -245,16 +257,17 @@ const styles = {
     flexWrap: 'wrap',
   },
   card: {
-    background: '#FFFFFF',
-    borderRadius: '12px',
+    background: '#111827',
+    borderRadius: '14px',
     padding: '24px',
     marginBottom: '24px',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+    border: '1px solid rgba(255,255,255,0.06)',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
   },
   cardTitle: {
-    fontSize: '16px',
+    fontSize: '15px',
     fontWeight: '600',
-    color: '#212121',
+    color: '#F1F5F9',
     marginBottom: '20px',
   },
   facilityGrid: {
@@ -263,10 +276,10 @@ const styles = {
     gap: '16px',
   },
   facilityCard: {
-    background: '#F9F9F9',
-    borderRadius: '10px',
+    background: '#0A0F1E',
+    borderRadius: '12px',
     padding: '16px',
-    border: '1px solid #EEEEEE',
+    border: '1px solid rgba(255,255,255,0.06)',
   },
   facilityTop: {
     display: 'flex',
@@ -278,7 +291,7 @@ const styles = {
   facilityName: {
     fontSize: '13px',
     fontWeight: '600',
-    color: '#212121',
+    color: '#F1F5F9',
     flex: 1,
   },
   priorityBadge: {
@@ -293,12 +306,12 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     fontSize: '12px',
-    color: '#757575',
+    color: '#94A3B8',
     marginBottom: '6px',
   },
   batteryBarBg: {
     height: '6px',
-    background: '#E0E0E0',
+    background: 'rgba(255,255,255,0.08)',
     borderRadius: '3px',
     marginBottom: '12px',
     overflow: 'hidden',

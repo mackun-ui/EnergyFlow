@@ -15,12 +15,13 @@ const styles = {
   container: {
     display: 'flex',
     minHeight: '100vh',
+    background: '#0A0F1E',
   },
   main: {
     marginLeft: '240px',
     flex: 1,
     padding: '32px',
-    background: '#F5F5F5',
+    background: '#0A0F1E',
     minHeight: '100vh',
   },
 };

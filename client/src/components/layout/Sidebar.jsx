@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Zap, LayoutDashboard, Calendar, BarChart2, LogOut } from 'lucide-react';
+import { Zap, LayoutDashboard, Calendar, BarChart2, LogOut, Users } from 'lucide-react';
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
@@ -15,6 +15,9 @@ const Sidebar = () => {
     { path: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
     { path: '/scheduling', label: 'Scheduling', icon: <Calendar size={18} /> },
     { path: '/reports', label: 'Reports', icon: <BarChart2 size={18} /> },
+    ...(user?.role === 'admin'
+      ? [{ path: '/users', label: 'Users', icon: <Users size={18} /> }]
+      : []),
   ];
 
   return (

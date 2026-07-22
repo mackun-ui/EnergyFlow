@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
-// pages (we will create these next)
+// pages 
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import SchedulingPage from './pages/scheduling/SchedulingPage';
 import ReportsPage from './pages/reports/ReportsPage';
+import UsersPage from './pages/users/UsersPage';
 
 // protected route wrapper
 const ProtectedRoute = ({ children }) => {
@@ -39,6 +40,11 @@ const App = () => {
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/users" element={
+            <ProtectedRoute>
+              <UsersPage />
+            </ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

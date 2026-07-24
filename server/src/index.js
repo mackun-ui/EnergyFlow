@@ -14,7 +14,13 @@ const reportRoutes = require('./routes/reportRoutes');
 const app = express();
 
 // middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://energyflow-client.onrender.com'
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
